@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import propTypes from 'prop-types';
 
@@ -16,11 +16,13 @@ const Dots = ({ selectedIndex, delay }) => {
         } else {
             X.value = 10
         }
-
     }, [selectedIndex])
-    return <Animated.View
-        style={[animatedStyle, { ...style.circle, opacity: selectedIndex ? 1 : 0.6 }]}
-    />
+
+    return (
+        <View style={{ ...style.circle, width: selectedIndex ? 150 : 10 }}>
+            <Animated.View style={[{ height: 6, backgroundColor: selectedIndex ? 'white' : '#808080' }, animatedStyle]} />
+        </View>
+    )
 }
 
 const style = StyleSheet.create({
@@ -28,8 +30,9 @@ const style = StyleSheet.create({
         width: 6,
         height: 6,
         borderRadius: 3,
-        margin: 5,
-        backgroundColor: "white"
+        marginHorizontal: 5,
+        backgroundColor: "#808080",
+        overflow: 'hidden'
     }
 })
 
